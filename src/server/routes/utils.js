@@ -7,8 +7,11 @@ const sessionChecker = (req, res, next) => {
 const loggedIn = (req, res, next) => {
   if (req.session.user) {
     res.locals.loggedIn = true
+    next()
+  } else {
+    res.locals.loggedIn = false
+    next()
   }
-  next()
 }
 
 
@@ -22,7 +25,8 @@ const hashPassword = (password) => {
   return bcrypt.hash(password, saltRounds)
 }
 
-const comparePassword = (password, hashedPassword) => {
-  return bcrypt.compare(password, hashedPassword)
+const comparePassword = (password, hashedPassword) => bcrypt.compare(password, hashedPassword)
+
+module.exports = {
+  sessionChecker, loggedIn, hashPassword, comparePassword,
 }
-module.exports = { sessionChecker, loggedIn, hashPassword, comparePassword }
