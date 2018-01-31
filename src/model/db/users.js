@@ -14,8 +14,8 @@ const updateProfile = (id, newName, newCity) => {
   const sql = 'UPDATE users SET full_name = $1, current_city = $2 WHERE id= $3 RETURNING *'
   return db.oneOrNone(sql, [newName, newCity, id])
     .then((result) => {
-      if(result) return { success: true, message: 'Your profile is updated! yay' }
-      return { success: false, message: 'You did something wonkey... try again'}
+      if (result) return { success: true, message: 'Your profile is updated! yay' }
+      return { success: false, message: 'You did something wonkey... try again' }
     })
     .catch(err => Object({ success: false, message: err.message }))
 }
@@ -25,4 +25,6 @@ const getUserById = (id) => {
   return db.one(sql, id)
 }
 
-module.exports = { addUser, verifyUser, updateProfile, getUserById }
+module.exports = {
+  addUser, verifyUser, updateProfile, getUserById,
+}

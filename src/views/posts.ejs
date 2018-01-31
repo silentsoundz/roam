@@ -4,7 +4,12 @@
       <div class="post-info">
         <h3><%= post.title %></h3>
         <h4><%= post.full_name %></h4>
+        <h4>Date Published: <%= publishedDate %></h4>
         <p><%= post.content %></p>
+        <% if (ownPage){ %>
+          <button type="submit" formaction='/edit' id="post-edit-save">Edit Post</button>
+          <button type="submit" id="delete">Delete Post</button>
+          <% } %>
 
 
 <%- include ./partial/footer.ejs %>

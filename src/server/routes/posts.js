@@ -1,6 +1,7 @@
 const router = require('express').Router()
+const moment = require('moment')
 const { getCityById } = require('../../model/db/cities')
-const { getPostById, addPost } = require('../../model/db/posts')
+const { getPostById, addPost, editPost } = require('../../model/db/posts')
 // const users = require('../../model/db/users')
 
 router.get('/posts/new', (req, res) => {
@@ -15,7 +16,11 @@ router.get('/posts/:id', (req, res) => {
   const cityId = req.params.id
   getPostById(Number(cityId))
     .then((post) => {
-      res.render('posts', { post, cityId })
+      const ownPage = (req.session.user.id === post.id) ? true : false
+      const publishedDate = moment(post.date).format('dddd, MMMM Do YYYY')
+      res.render('posts', {
+        post, cityId, publishedDate, ownPage,
+      })
     })
     .catch(console.error)
 })
