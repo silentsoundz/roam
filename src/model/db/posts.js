@@ -11,7 +11,7 @@ const getPostsByUserId = (id) => {
 }
 
 const getPostById = (id) => {
-  const sql = 'SELECT title, posts.city_id, content, users.full_name FROM posts JOIN users ON author_id = users.id WHERE posts.id = $1'
+  const sql = 'SELECT title, posts.city_id, content, users.full_name, users.id FROM posts JOIN users ON author_id = users.id WHERE posts.id = $1'
   return db.one(sql, id)
 }
 
@@ -20,4 +20,16 @@ const getPostsByCityId = (cityId) => {
   return db.many(sql, cityId)
 }
 
-module.exports = { addPost, getPostsByUserId, getPostById, getPostsByCityId }
+
+const editPost = (id, newTitle, newContent) => {
+  const sql = 'UPDATE posts SET title = $1, content = $2 WHERE id = $3 RETURNING *'
+  return db.oneOrNone(sql, [newTitle, newContent, id])
+    .then((result) => {
+      if (result) return { success: true, message: 'Your profile is updated! yay' }
+      return { success: false, message: 'You did something wonkey... try again' }
+    })
+    .catch(err => Object({ success: false, message: err.message }))
+}
+
+
+module.exports = { addPost, getPostsByUserId, getPostById, getPostsByCityId, editPost }
