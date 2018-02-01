@@ -1,7 +1,9 @@
 const router = require('express').Router()
 const moment = require('moment')
 const { getCityById } = require('../../model/db/cities')
-const { getPostById, addPost, editPost } = require('../../model/db/posts')
+const {
+  getPostInfoById, getPostById, addPost, editPost,
+} = require('../../model/db/posts')
 // const users = require('../../model/db/users')
 
 router.get('/posts/new', (req, res) => {
@@ -14,7 +16,7 @@ router.get('/posts/new', (req, res) => {
 
 router.get('/posts/:id', (req, res) => {
   const cityId = req.params.id
-  getPostById(Number(cityId))
+  getPostInfoById(Number(cityId))
     .then((post) => {
       const ownPage = (req.session.user.id === post.id) ? true : false
       const publishedDate = moment(post.date).format('dddd, MMMM Do YYYY')
@@ -24,7 +26,6 @@ router.get('/posts/:id', (req, res) => {
     })
     .catch(console.error)
 })
-
 
 router.post('/posts/new', (req, res) => {
   const { title, content, city_id } = req.body
@@ -39,4 +40,23 @@ router.post('/posts/new', (req, res) => {
     .catch(console.error)
 })
 
+router.get('/posts/edit/:id', (req, res) => {
+  const id = Number(req.params.id)
+
+  getPostById(id)
+    .then((post) => {
+      res.render('edit_post', { post })
+    })
+    .catch(console.error)
+})
+
+router.post('posts/edit', (req, res) => {
+  const { newTitle, newContent } = req.body
+  const { user } = req.session
+
+  editPost(user, newTitle, newContent)
+    .then((result) => {
+      res.send(result)
+    })
+})
 module.exports = router

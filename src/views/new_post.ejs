@@ -7,11 +7,10 @@
   </div>
   <div class="flex-container">
     <form action="/posts/new" method="POST">
-      <input name="city_id" value="<%= cityId %>" style="display:none">
-      <input name="title" type="text" placeholder="Post Title" />
-      <textarea name="content" type="text" placeholder="Post body" > </textarea>
+      <input name="city_id" value="<%= cityId %>" style="display:none" >
+      <input name="title" type="text" placeholder="Post Title" required/>
+      <textarea name="content" placeholder="Post body" required></textarea>
       <input type="submit" name="submit-btn" value="Submit">
-      <!-- <button inputype="submit"> Submit </button> -->
     </form>
   </div>
 
