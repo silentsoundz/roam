@@ -49,3 +49,9 @@ if (editProfileBtn) {
     }
   })
 }
+
+const getPostElements = () => {
+  const title = document.getElementByClassName('edit-title')
+  const content = document.getElementByClassName('edit-content')
+  return { title, content }
+}

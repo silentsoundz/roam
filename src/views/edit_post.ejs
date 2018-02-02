@@ -11,7 +11,7 @@
       <input name="title" type="text" value="<%= post.title %>" />
     </div>
     <div class="edit-content">Post Content
-      <textarea name="content" placeholder="<%= post.content %>"></textarea>
+      <textarea rows="20" cols="100" name="content" placeholder="<%= post.content %>"></textarea>
     </div>
     <button type="submit" formaction='/edit' id="edit-post-save">Save Edit</button>
   </form>
