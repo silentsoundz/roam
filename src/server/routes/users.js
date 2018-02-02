@@ -23,7 +23,7 @@ router.get('/profile/:id', (req, res) => {
 })
 
 router.put('/profile-update', (req, res) => {
-  const { newName, newCity } = req.body
+  const { newName, newCity } = req.body.data
   const { id } = req.session.user
 
   updateProfile(id, newName, newCity)

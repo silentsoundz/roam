@@ -1,11 +1,24 @@
 const editProfileBtn = document.getElementById('edit-save')
+const editPostBtn = document.getElementById('edit-post-save')
+
+const updateFetch = (pathUrl, data) => {
+  fetch(pathUrl, {
+    method: 'PUT',
+    headers: { 'Content-type': 'application/json' },
+    credentials: 'same-origin',
+    body: JSON.stringify({ data }),
+  })
+    .then(result => result.json())
+    .then(console.log)
+}
+
 
 const getProfileElements = () => {
   const name = document.getElementById('full-name')
   const city = document.getElementById('city')
   return { name, city }
 }
-const editClick = function (event) {
+const editClick = function () {
   editProfileBtn.innerHTML = 'Save Profile'
   const { name, city } = getProfileElements()
   const currName = name.innerHTML
@@ -15,6 +28,7 @@ const editClick = function (event) {
 }
 
 const saveClick = function (event) {
+  const pathUrl = ('/profile-update')
   const { name, city } = getProfileElements()
   editProfileBtn.innerHTML = 'Edit Profile'
   const newName = name.value
@@ -22,14 +36,8 @@ const saveClick = function (event) {
   name.outerHTML = `<span id="full-name">${newName}</span>`
   city.outerHTML = `<span id="city">${newCity}</span>`
   event.preventDefault()
-  fetch('/profile-update', {
-    method: 'PUT',
-    headers: { 'Content-type': 'application/json' },
-    credentials: 'same-origin',
-    body: JSON.stringify({ newName, newCity }),
-  })
-    .then(result => result.json())
-    .then(console.log)
+  const data = { newName, newCity }
+  updateFetch(pathUrl, data)
 }
 
 if (editProfileBtn) {

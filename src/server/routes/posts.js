@@ -4,7 +4,6 @@ const { getCityById } = require('../../model/db/cities')
 const {
   getPostInfoById, getPostById, addPost, editPost,
 } = require('../../model/db/posts')
-// const users = require('../../model/db/users')
 
 router.get('/posts/new', (req, res) => {
   const cityId = req.query.city_id
@@ -18,7 +17,7 @@ router.get('/posts/:id', (req, res) => {
   const cityId = req.params.id
   getPostInfoById(Number(cityId))
     .then((post) => {
-      const ownPage = (req.session.user.id === post.id) ? true : false
+      const ownPage = (req.session.user.id === post.author_id) ? true : false
       const publishedDate = moment(post.date).format('dddd, MMMM Do YYYY')
       res.render('posts', {
         post, cityId, publishedDate, ownPage,
@@ -58,5 +57,6 @@ router.post('posts/edit', (req, res) => {
     .then((result) => {
       res.send(result)
     })
+    .catch(console.error)
 })
 module.exports = router

@@ -16,7 +16,13 @@ const getPostsByUserId = (id) => {
 
 
 const getPostInfoById = (id) => {
-  const sql = 'SELECT title, posts.city_id, content, users.full_name, users.id FROM posts JOIN users ON author_id = users.id WHERE posts.id = $1'
+  const sql = `
+    SELECT posts.id, posts.title, posts.city_id, posts.content, posts.author_id, users.full_name
+    FROM posts
+    JOIN users
+    ON author_id = users.id
+    WHERE posts.id = $1
+    `
   return db.one(sql, id)
 }
 
