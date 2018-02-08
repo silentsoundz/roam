@@ -20,8 +20,8 @@ router.post('/signup', (req, res) => {
       .then((user) => {
         if (user) {
           req.session.user = user
-          const userId = req.session.user.id
-          return res.redirect(`/profile/${userId}`)
+          const newUser = req.session.user
+          return res.redirect(`/profile/${newUser.id}`)
         }
       })
       .catch(console.error)
@@ -39,7 +39,8 @@ router.post('/login', (req, res) => {
       comparePassword(password, user.password).then((isValid) => {
         if (isValid) {
           req.session.user = user
-          return res.redirect(`/profile/${user.id}`)
+          const returningUser = req.session.user
+          return res.redirect(`/profile/${returningUser.id}`)
         }
         return res.redirect('/login')
       })
