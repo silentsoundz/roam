@@ -51,16 +51,11 @@ const getPostsByCityId = (cityId) => {
 
 const editPost = (id, newTitle, newContent) => {
   const sql = `
-  UPDATE posts SET title = $1, content = $2
-  WHERE id = $3
+  UPDATE posts SET title = $2, content = $3
+  WHERE id = $1
   RETURNING *
   `
-  return db.oneOrNone(sql, [newTitle, newContent, id])
-    .then((result) => {
-      if (result) return { success: true, message: 'Your profile is updated! yay' }
-      return { success: false, message: 'You did something wonkey... try again' }
-    })
-    .catch(err => Object({ success: false, message: err.message }))
+  return db.one(sql, [id, newTitle, newContent])
 }
 
 

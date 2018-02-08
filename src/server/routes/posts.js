@@ -49,13 +49,13 @@ router.get('/posts/edit/:id', (req, res) => {
     .catch(console.error)
 })
 
-router.post('posts/edit', (req, res) => {
-  const { newTitle, newContent } = req.body
-  const { user } = req.session
+router.put('/posts/edit/:id', (req, res) => {
+  const { postTitle, postContent } = req.body.data
+  const postId = Number(req.body.data.postId)
 
-  editPost(user, newTitle, newContent)
-    .then((result) => {
-      res.send(result)
+  editPost(postId, postTitle, postContent)
+    .then((response) => {
+      res.json({ response })
     })
     .catch(console.error)
 })

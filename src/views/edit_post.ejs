@@ -3,16 +3,12 @@
 
 <div class="flex-container">
   <h1>Edit Post</h1>
-  <h2><%= post.id %></h2>
+  <template class="post-id"><%= post.id %></template>
 </div>
 <div class="flex-container">
   <form class="edit-post">
-    <div class="edit-title">Post Title
-      <input name="title" type="text" value="<%= post.title %>" />
-    </div>
-    <div class="edit-content">Post Content
-      <textarea rows="20" cols="100" name="content" placeholder="<%= post.content %>"></textarea>
-    </div>
+    Title: <input class="edit-title" label="Post Title" name="title" type="text" value="<%= post.title %>" />
+    Post: <textarea class="edit-content" rows="20" cols="100" name="content"><%= post.content %></textarea>
     <button type="submit" formaction='/edit' id="edit-post-save">Save Edit</button>
   </form>
 </div>
