@@ -9,7 +9,7 @@
     <form action="/posts/new" method="POST">
       <input name="city_id" value="<%= cityId %>" style="display:none" >
       <input name="title" type="text" placeholder="Post Title" required/>
-      <textarea name="content" placeholder="Post body" required></textarea>
+      <textarea name="content" rows="20" cols="100" placeholder="Post body" required></textarea>
       <input type="submit" name="submit-btn" value="Submit">
     </form>
   </div>

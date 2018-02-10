@@ -11,7 +11,9 @@
           <a href="/posts/edit/<%= post.id %>">
             <button type="button" data-id="<%= post.id %>" id="post-edit-save">Edit Post</button>
           </a>
-          <button type="submit" id="delete">Delete Post</button>
+          <a href="/posts/delete/<%= post.id %>?<% if (city) { %>city=<%= city %><% } else if (profile) { %>profile=<%= profile %> <% } %>">
+            <button type="submit" id="delete">Delete Post</button>
+          </a>
           <% } %>
 
 

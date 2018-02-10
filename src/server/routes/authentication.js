@@ -21,7 +21,7 @@ router.post('/signup', (req, res) => {
         if (user) {
           req.session.user = user
           const newUser = req.session.user
-          return res.redirect(`/profile/${newUser.id}`)
+          res.redirect(`/profile/${newUser.id}`)
         }
       })
       .catch(console.error)
@@ -40,9 +40,9 @@ router.post('/login', (req, res) => {
         if (isValid) {
           req.session.user = user
           const returningUser = req.session.user
-          return res.redirect(`/profile/${returningUser.id}`)
+          res.redirect(`/profile/${returningUser.id}`)
         }
-        return res.redirect('/login')
+        res.redirect('/login')
       })
     })
     .catch(console.error)

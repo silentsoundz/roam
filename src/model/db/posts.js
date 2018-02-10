@@ -48,7 +48,6 @@ const getPostsByCityId = (cityId) => {
   return db.many(sql, cityId)
 }
 
-
 const editPost = (id, newTitle, newContent) => {
   const sql = `
   UPDATE posts SET title = $2, content = $3
@@ -58,7 +57,15 @@ const editPost = (id, newTitle, newContent) => {
   return db.one(sql, [id, newTitle, newContent])
 }
 
+const deletePost = (id) => {
+  const sql = `
+  DELETE FROM posts
+  WHERE id = $1
+  `
+  return db.none(sql, id)
+}
+
 
 module.exports = {
-  addPost, getPostById, getPostsByUserId, getPostInfoById, getPostsByCityId, editPost,
+  addPost, getPostById, getPostsByUserId, getPostInfoById, getPostsByCityId, editPost, deletePost,
 }
