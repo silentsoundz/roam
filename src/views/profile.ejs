@@ -14,7 +14,7 @@
   <div class="post-info">
     <% posts.forEach((post) => { %>
       <div id=<%= post.id %>>
-        <a href='/posts/<%= post.id %>'><%= post.title %></a>
+        <a href='/posts/<%= post.id %>?profile=<%= post.author_id %>'><%= post.title %></a>
         <%= post.city_id %>
         <%= post.content.substring(0, 1000) %>
       </div>

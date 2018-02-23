@@ -3,15 +3,17 @@
 
     <div class="page-column">
       <div class="post-info">
-        <h3><%= post.title %></h3>
-        <h4><%= post.full_name %></h4>
+        <h3>Title: <%= post.title %></h3>
+        <h4>Author: <%= post.full_name %></h4>
         <h4>Date Published: <%= publishedDate %></h4>
         <p><%= post.content %></p>
         <% if (ownPage){ %>
           <a href="/posts/edit/<%= post.id %>">
             <button type="button" data-id="<%= post.id %>" id="post-edit-save">Edit Post</button>
           </a>
-          <button type="submit" id="delete">Delete Post</button>
+          <a href="/posts/delete/<%= post.id %>?<% if (city) { %>city=<%= city %><% } else if (profile) { %>profile=<%= profile %> <% } %>">
+            <button type="submit" id="delete">Delete Post</button>
+          </a>
           <% } %>
 
 

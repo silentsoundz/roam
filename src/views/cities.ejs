@@ -12,7 +12,7 @@
         <div id=<%= post.id %>>
           <%= post.name %>
           <%= post.full_name %>
-          <a href='/posts/<%= post.id %>'><%= post.title %></a>
+          <a href='/posts/<%= post.id %>?city=<%= postInfo[0].city_id %>'><%= post.title %></a>
           <%= post.date %>
           <%= post.content.substring(0, 140) %>
         </div>
