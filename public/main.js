@@ -86,13 +86,12 @@ if (editPostBtn) {
 
 if (deletePostBtn) {
   deletePostBtn.addEventListener('click', (event) => {
-    // const postId = document.querySelectorAll('.postId')[0].value
-    // const profileUserId = document.querySelectorAll('.profileUserID')[0].value
-    // const page = document.querySelectorAll('.page')[0].value
+    const postId = document.querySelectorAll('.postId')[0].value
+    const profileUserId = document.querySelectorAll('.profileUserID')[0].value
+    const page = document.querySelectorAll('.page')[0].value
     const pathUrl = (`/posts/delete/${postId}?page=${page}&id=${profileUserId}`)
 
     event.preventDefault()
     deletePostFetch(pathUrl)
-
   })
 }
